@@ -1,7 +1,27 @@
 package med.voll.api.controller;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import med.voll.api.address.DataAddress;
-import med.voll.api.medico.Speciality;
+import med.voll.api.medical.Speciality;
 
-public record MedicalRecord(String name, String email, String crm, Speciality speciality, DataAddress address) {
+public record MedicalRecord(
+        @NotBlank
+        String name,
+        @NotBlank
+        @Email
+        String email,
+        @NotBlank
+        @Pattern(regexp = "\\d{4,6}")
+        String crm,
+        @NotBlank
+        String phone,
+        @NotNull
+        Speciality speciality,
+        @NotNull
+        @Valid
+        DataAddress address) {
 }

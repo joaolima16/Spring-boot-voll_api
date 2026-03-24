@@ -1,0 +1,1 @@
+ALTER TABLE medicals ADD COLUMN phone VARCHAR(20);
