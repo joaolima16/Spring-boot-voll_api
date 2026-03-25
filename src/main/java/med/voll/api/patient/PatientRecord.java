@@ -1,27 +1,21 @@
-package med.voll.api.controller;
+package med.voll.api.patient;
 
-import jakarta.validation.Valid;
+import jakarta.persistence.Embedded;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import med.voll.api.address.DataAddress;
-import med.voll.api.medical.Speciality;
 
-public record MedicalRecord(
+public record PatientRecord(
         @NotBlank
         String name,
         @NotBlank
         @Email
         String email,
         @NotBlank
-        @Pattern(regexp = "\\d{4,6}")
-        String crm,
-        @NotBlank
         String phone,
-        @NotNull
-        Speciality speciality,
-        @NotNull
-        @Valid
+        @NotBlank
+        @Pattern(regexp = "\\d{3}\\.?\\d{3}\\.?\\d{3}\\-?\\d{2}")
+        String cpf,
         DataAddress address) {
 }
