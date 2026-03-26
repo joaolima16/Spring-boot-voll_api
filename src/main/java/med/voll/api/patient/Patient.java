@@ -17,6 +17,7 @@ public class Patient {
     private Long id;
     private String name;
     private String email;
+    private Boolean active;
     private String phone;
     private String cpf;
     @Embedded
@@ -24,9 +25,24 @@ public class Patient {
 
     public Patient(PatientRecord patientRecord){
         this.name = patientRecord.name();
+        this.active = true;
         this.email = patientRecord.email();
         this.phone = patientRecord.phone();
         this.cpf = patientRecord.cpf();
         this.address = new Address(patientRecord.address());
+    }
+    public void update(PatientUpdateRequest patientUpdateRequest) {
+        if(patientUpdateRequest.name() != null){
+            this.name = patientUpdateRequest.name();
+        }
+        if(patientUpdateRequest.phone() != null){
+            this.phone = patientUpdateRequest.phone();
+        }
+        if(patientUpdateRequest.address() != null){
+            this.address.update(patientUpdateRequest.address());
+        }
+    }
+    public void delete(){
+        this.active = false;
     }
 }

@@ -1,11 +1,9 @@
 package med.voll.api.controller;
 
 
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import med.voll.api.patient.Patient;
-import med.voll.api.patient.PatientRecord;
-import med.voll.api.patient.PatientRepository;
-import med.voll.api.patient.PatientResponse;
+import med.voll.api.patient.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +21,18 @@ public class PatientController {
     }
     @GetMapping
     public Page<PatientResponse> listen(Pageable pageable){
-      return this.patientRepository.findAll(pageable).map(PatientResponse::new);
-
+      return this.patientRepository.findAllByActiveTrue(pageable).map(PatientResponse::new);
+    }
+    @PutMapping
+    @Transactional
+    public void update(@Valid @RequestBody PatientUpdateRequest patientUpdateRequest){
+        var patient = patientRepository.getReferenceById(patientUpdateRequest.id());
+        patient.update(patientUpdateRequest);
+    }
+    @DeleteMapping({"/{id}"})
+    @Transactional
+    public void delete(@PathVariable Long id) {
+        var patient = patientRepository.getReferenceById(id);
+        patient.delete();
     }
 }
