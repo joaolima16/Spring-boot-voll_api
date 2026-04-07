@@ -38,6 +38,7 @@ public class Medical {
         this.speciality = medicalRecord.speciality();
         this.address = new Address(medicalRecord.address());
     }
+
     public void update(MedicalUpdateRequest medicalUpdateRequest) {
         if(medicalUpdateRequest.name() != null){
             this.name = medicalUpdateRequest.name();
