@@ -1,10 +1,9 @@
-package med.voll.api.patient;
+package med.voll.api.domain.patient;
 
-import jakarta.persistence.Embedded;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import med.voll.api.address.DataAddress;
+import med.voll.api.domain.address.DataAddress;
 
 public record PatientRecord(
         @NotBlank

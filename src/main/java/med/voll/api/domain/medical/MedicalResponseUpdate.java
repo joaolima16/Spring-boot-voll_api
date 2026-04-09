@@ -1,6 +1,6 @@
-package med.voll.api.medical;
+package med.voll.api.domain.medical;
 
-import med.voll.api.address.Address;
+import med.voll.api.domain.address.Address;
 
 public record MedicalResponseUpdate(Long id, String name, String email, String crm, Speciality speciality, Address address) {
     public MedicalResponseUpdate(Medical medical){
