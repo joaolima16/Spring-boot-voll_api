@@ -18,7 +18,5 @@ public class ApiExceptionHandler {
     public ResponseEntity treatError400(MethodArgumentNotValidException ex){
         var errors = ex.getFieldErrors();
         return ResponseEntity.badRequest().body(errors.stream().map(ResponseErrorValidation::new).toList());
-
     }
-
 }
